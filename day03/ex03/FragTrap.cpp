@@ -2,7 +2,7 @@
 
 FragTrap::FragTrap() : ClapTrap("FR4G-TP", 100, 100, 100, 100, 1, 30, 20, 5)
 {
-    std::cout << "Default constructor called, " << _name << " ready to kill" << std::endl;
+    std::cout << "FR4G-TP default constructor called, " << _name << " ready to kill" << std::endl;
 }
 
 FragTrap::FragTrap(std::string name) : ClapTrap(name, 100, 100, 100, 100, 1, 30, 20, 5)
@@ -30,13 +30,13 @@ FragTrap &FragTrap::operator=(FragTrap const &ft)
 
 void FragTrap::rangedAttack(std::string const &target) const
 {
-    std::cout << "FR4G-TP " << this->getName() << " attack " << target << " with Aya Nakamura's sound causing "
+    std::cout << "FR4G-TP[" << this->getName() << "] attack " << target << " with Aya Nakamura's sound causing "
               << getRangedAttackDamage() << " points of damages !" << std::endl;
 }
 
 void FragTrap::meleeAttack(std::string const &target) const
 {
-    std::cout << "FR4G-TP " << this->getName() << " attack " << target << " whith a mawashi geri kick causing "
+    std::cout << "FR4G-TP[" << this->getName() << "] attack " << target << " whith a mawashi geri kick causing "
               << getMeleeAttackDamage() << " points of damages !" << std::endl;
 }
 
@@ -50,7 +50,7 @@ void FragTrap::vaulthunter_dot_exe(std::string const &target)
     else
     {
         this->_energyPoints = this->_energyPoints - 25;
-        std::cout << "FR4G-TP " << this->getName() << " launch an attack " << attack[index]
+        std::cout << "FR4G-TP[" << this->getName() << "] launch an attack " << attack[index]
                   << " against " << target
                   << ", this one cost him 25 energy points, he has from now on "
                   << this->_energyPoints << std::endl;

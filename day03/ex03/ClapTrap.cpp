@@ -50,27 +50,27 @@ ClapTrap &ClapTrap::operator=(ClapTrap const &ft)
 
 void ClapTrap::rangedAttack(std::string const &target) const
 {
-    std::cout << "CL4P-TP " << this->getName() << " attack " << target << " with rangedAttack causing "
+    std::cout << "CL4P-TP[" << this->getName() << "] attack " << target << " with rangedAttack causing "
               << getRangedAttackDamage() << " points of damages !" << std::endl;
 }
 
 void ClapTrap::meleeAttack(std::string const &target) const
 {
-    std::cout << "CL4P-TP " << this->getName() << " attack " << target << " with melleeAttack causing "
+    std::cout << "CL4P-TP[" << this->getName() << "] attack " << target << " with melleeAttack causing "
               << getMeleeAttackDamage() << " points of damages !" << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-    if (amount - this->_armorDamageReduction >= (unsigned int)this->_hitPoints)
+    if (amount - this->_armorDamageReduction >= (unsigned int)this->getHitPoints())
     {
         this->_hitPoints = 0;
-        std::cout << this->getName() << " is over, he has lost all of his life points" << std::endl;
+        std::cout << "CL4P-TP[" << this->getName() << "] is over, he has lost all of his life points" << std::endl;
     }
     else
     {
         this->_hitPoints = this->_hitPoints - (amount - this->_armorDamageReduction);
-        std::cout << this->getName() << " lost " << amount - _armorDamageReduction
+        std::cout << "CL4P-TP[" << this->getName() << "] lost " << amount - _armorDamageReduction
                   << " points of life, it is less than the " << amount
                   << " points of life he would have lost without his armor" << std::endl;
     }
@@ -78,16 +78,16 @@ void ClapTrap::takeDamage(unsigned int amount)
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-    if (amount + this->_hitPoints < 100)
+    if (amount + this->_hitPoints < (unsigned int)this->getMaxHitPoints())
     {
-        this->_hitPoints = this->_hitPoints + amount;
-        std::cout << this->getName() << " has changed some pieces, he get back " << amount << " points of life, he has from now on "
+        this->_hitPoints += amount;
+        std::cout << "CL4P-TP[" << this->getName() << "] has changed some pieces, he get back " << amount << " points of life, he has from now on "
                   << this->_hitPoints << std::endl;
     }
     else
     {
-        this->_hitPoints = 100;
-        std::cout << this->getName() << " has all of his life points " << std::endl;
+        this->_hitPoints = this->getMaxHitPoints();
+        std::cout << "CL4P-TP[" << this->getName() << "] has all of his life points " << std::endl;
     }
 }
 

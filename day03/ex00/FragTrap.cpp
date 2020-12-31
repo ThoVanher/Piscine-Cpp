@@ -40,27 +40,27 @@ FragTrap &FragTrap::operator=(FragTrap const &ft)
 
 void FragTrap::rangedAttack(std::string const &target) const
 {
-    std::cout << "FR4G-TP " << this->getName() << " attack " << target << " with Aya Nakamura's sound causing "
+    std::cout << "FR4G-TP[" << this->getName() << "] attack " << target << " with Aya Nakamura's sound causing "
               << getRangedAttackDamage() << " points of damages !" << std::endl;
 }
 
 void FragTrap::meleeAttack(std::string const &target) const
 {
-    std::cout << "FR4G-TP " << this->getName() << " attack " << target << " whith a mawashi geri kick causing "
+    std::cout << "FR4G-TP[" << this->getName() << "] attack " << target << " whith a mawashi geri kick causing "
               << getMeleeAttackDamage() << " points of damages !" << std::endl;
 }
 
 void FragTrap::takeDamage(unsigned int amount)
 {
-    if (amount - this->_armorDamageReduction >= (unsigned int)this->_hitPoints)
+    if (amount - this->_armorDamageReduction >= (unsigned int)this->getHitPoints())
     {
         this->_hitPoints = 0;
-        std::cout << this->getName() << " is over, he has lost all of his life points" << std::endl;
+        std::cout << "FR4G-TP[" << this->getName() << "] is over, he has lost all of his life points" << std::endl;
     }
     else
     {
         this->_hitPoints = this->_hitPoints - (amount - this->_armorDamageReduction);
-        std::cout << this->getName() << " lost " << amount - _armorDamageReduction
+        std::cout << "FR4G-TP[" << this->getName() << "] lost " << amount - _armorDamageReduction
                   << " points of life, it is less than the " << amount
                   << " points of life he would have lost without his armor" << std::endl;
     }
@@ -68,16 +68,16 @@ void FragTrap::takeDamage(unsigned int amount)
 
 void FragTrap::beRepaired(unsigned int amount)
 {
-    if (amount + this->_hitPoints < 100)
+    if (amount + this->_hitPoints < (unsigned int)this->getMaxHitPoints())
     {
-        this->_hitPoints = this->_hitPoints + amount;
-        std::cout << this->getName() << " has changed some pieces, he get back " << amount << " points of life, he has from now on "
+        this->_hitPoints += amount;
+        std::cout << "FR4G-TP[" << this->getName() << "] has changed some pieces, he get back " << amount << " points of life, he has from now on "
                   << this->_hitPoints << std::endl;
     }
     else
     {
-        this->_hitPoints = 100;
-        std::cout << this->getName() << " has all of his life points " << std::endl;
+        this->_hitPoints = this->getMaxHitPoints();
+        std::cout << "FR4G-TP[" << this->getName() << "] has all of his life points " << std::endl;
     }
 }
 
@@ -91,7 +91,7 @@ void FragTrap::vaulthunter_dot_exe(std::string const &target)
     else
     {
         this->_energyPoints = this->_energyPoints - 25;
-        std::cout << "FR4G-TP " << this->getName() << " launch an attack " << attack[index]
+        std::cout << "FR4G-TP[" << this->getName() << "] launch an attack " << attack[index]
                   << " against " << target
                   << ", this one cost him 25 energy points, he has from now on "
                   << this->_energyPoints << std::endl;

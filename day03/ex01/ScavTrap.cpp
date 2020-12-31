@@ -40,14 +40,14 @@ ScavTrap::ScavTrap(ScavTrap const &ft)
 
 void ScavTrap::rangedAttack(std::string const &target) const
 {
-    std::cout << "SC4V-TP " << this->getName() << " paralyse " << target << " with ultrasound causing "
-              << this->_rangedAttackDamage << " points of damages !" << std::endl;
+    std::cout << "SC4V-TP[" << this->getName() << "] paralyse " << target << " with ultrasound causing "
+              << getRangedAttackDamage() << " points of damages !" << std::endl;
 }
 
 void ScavTrap::meleeAttack(std::string const &target) const
 {
-    std::cout << "SC4V-TP " << this->getName() << " tackle  " << target << " causing "
-              << this->_meleeAttackDamage << " points of damages !" << std::endl;
+    std::cout << "SC4V-TP[" << this->getName() << "] tackle " << target << " causing "
+              << getMeleeAttackDamage() << " points of damages !" << std::endl;
 }
 
 void ScavTrap::challengeNewComer(int index)
@@ -60,18 +60,18 @@ void ScavTrap::challengeNewComer(int index)
         std::cout << "Math quiz : what is the square root of 381 ? " << std::endl;
         std::cin >> cmd;
         if (cmd.compare("19") == 0)
-            std::cout << "Congrat's, come in" << std::endl;
+            std::cout << "SC4V-TP[" << this->getName() << "] : Congrat's, come in" << std::endl;
         else
-            std::cout << "answer was '19', you're an idiot, get back, ciao ! " << std::endl;
+            std::cout << "SC4V-TP[" << this->getName() << "] : answer was '19', you're an idiot, get back, ciao ! " << std::endl;
     }
     if (index == 1)
     {
         std::cout << "write correctly the word 'aurnitor1ke' in a good french" << std::endl;
         std::cin >> cmd;
         if (cmd.compare("ornithorynque") == 0)
-            std::cout << "Well done !! Come in ! " << std::endl;
+            std::cout << "SC4V-TP[" << this->getName() << "] : Well done !! Come in ! " << std::endl;
         else
-            std::cout << "wrong, return to your mother skirts and learn french !" << std::endl;
+            std::cout << "SC4V-TP[" << this->getName() << "] : wrong, return to your mother skirts and learn franch !" << std::endl;
     }
     if (index == 2)
     {
@@ -79,24 +79,24 @@ void ScavTrap::challengeNewComer(int index)
         std::cout << "what is my name ?" << std::endl;
         std::cin >> cmd;
         if (cmd.compare(this->getName()) == 0)
-            std::cout << "Like i said, easy ! come in ! " << std::endl;
+            std::cout << "SC4V-TP[" << this->getName() << "] : Like i said, easy ! come in ! " << std::endl;
         else
-            std::cout << "I was wrong you're not the guy i thought, go back to read the main" << std::endl;
+            std::cout << "SC4V-TP[" << this->getName() << "] : I was wrong you're not the guy i thought, go back to read the main" << std::endl;
     }
     std::cout << std::endl;
 }
 
 void ScavTrap::takeDamage(unsigned int amount)
 {
-    if (amount - this->_armorDamageReduction >= (unsigned int)this->_hitPoints)
+    if (amount - this->_armorDamageReduction >= (unsigned int)this->getHitPoints())
     {
         this->_hitPoints = 0;
-        std::cout << this->getName() << " is over, he has lost all of his life points" << std::endl;
+        std::cout << "SC4V-TP[" << this->getName() << "] is over, he has lost all of his life points" << std::endl;
     }
     else
     {
         this->_hitPoints = this->_hitPoints - (amount - this->_armorDamageReduction);
-        std::cout << this->getName() << " lost " << amount - _armorDamageReduction
+        std::cout << "SC4V-TP[" << this->getName() << "] lost " << amount - _armorDamageReduction
                   << " points of life, it is less than the " << amount
                   << " points of life he would have lost without his armor" << std::endl;
     }
@@ -104,16 +104,16 @@ void ScavTrap::takeDamage(unsigned int amount)
 
 void ScavTrap::beRepaired(unsigned int amount)
 {
-    if (amount + this->_hitPoints < 100)
+    if (amount + this->_hitPoints < (unsigned int)this->getMaxHitPoints())
     {
-        this->_hitPoints = this->_hitPoints + amount;
-        std::cout << this->getName() << " has changed some pieces, he get back " << amount << " points of life, he has from now on "
+        this->_hitPoints += amount;
+        std::cout << "SC4V-TP[" << this->getName() << "] has changed some pieces, he get back " << amount << " points of life, he has from now on "
                   << this->_hitPoints << std::endl;
     }
     else
     {
-        this->_hitPoints = 100;
-        std::cout << this->getName() << " has all of his life points " << std::endl;
+        this->_hitPoints = this->getMaxHitPoints();
+        std::cout << "SC4V-TP[" << this->getName() << "] has all of his life points " << std::endl;
     }
 }
 

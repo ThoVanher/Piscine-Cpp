@@ -19,7 +19,7 @@ int main()
               << "----TESTS DE LA FONCTION TAKE DAMAGE ET REPAIR----" << std::endl
               << std::endl;
     Donatello.takeDamage(120);
-    std::cout << Bob.getHitPoints() << std::endl;
+    std::cout << Donatello.getHitPoints() << std::endl;
     Donatello.beRepaired(120);
     std::cout << Donatello.getHitPoints() << std::endl;
     Donatello.takeDamage(70);

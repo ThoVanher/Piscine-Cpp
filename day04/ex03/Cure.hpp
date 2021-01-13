@@ -10,7 +10,7 @@ Cure();
 Cure(Cure const &cu);
 Cure &operator=(Cure const &cu);
 ~Cure();
-virtual AMateria* clone() const;
+virtual Cure* clone() const;
 };
 
 #endif

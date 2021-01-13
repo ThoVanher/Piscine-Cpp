@@ -11,9 +11,15 @@ Cure::Cure(Cure const & cu)
 
 Cure &Cure::operator=(Cure const & cu)
 {
-cu.
+AMateria::operator=(cu);
+return (*this);
 }
 
 Cure::~Cure()
 {
+}
+
+Cure * Cure::clone() const
+{
+return (new Cure());
 }
